@@ -2,8 +2,7 @@ import type { ComponentType } from "react";
 import {
   BarChart3, Bell, Bot, CalendarCheck, CheckCircle2,
   CircleDollarSign, Code2, FileCheck2, FileText, Gauge,
-  Layers3, LifeBuoy, Lock, MessageSquareText, Rocket,
-  ShieldCheck, Sparkles, Target, Users, Workflow, Zap
+  LifeBuoy, Rocket, Target, Users, Workflow, Zap
 } from "@/components/icons";
 
 export type IconComponent = ComponentType<{ size?: number; className?: string }>;
@@ -52,19 +51,28 @@ export const clientSteps = journey.map(([title, description], index) => ({
   gate: index + 1,
 }));
 
+export const deliverables = [
+  { id: "brief",     title: "Project Brief",     status: "ready",    gate: 1, description: "Goals, scope, and approval structure." },
+  { id: "blueprint", title: "System Blueprint",  status: "ready",    gate: 2, description: "Architecture, integrations, and data models." },
+  { id: "mvp",       title: "MVP Preview",       status: "current",  gate: 3, description: "Working preview build with all core routes." },
+  { id: "qa",        title: "QA Report",         status: "upcoming", gate: 4, description: "Test results, accessibility, and Lighthouse scores." },
+  { id: "launch",    title: "Launch Package",    status: "upcoming", gate: 5, description: "Production-ready build with receipts." },
+  { id: "training",  title: "Training Guide",    status: "upcoming", gate: 6, description: "Handoff docs and team training materials." },
+];
+
 export const adminModules: [string, string, IconComponent][] = [
-  ["Leads & Pipeline",  "Track all leads from intake to close.",          BarChart3],
-  ["Clients",           "Manage active client projects and portals.",      Users],
-  ["Payments",          "View receipts, invoices, and payment events.",    CircleDollarSign],
-  ["Approvals",         "Process release gates and change requests.",      CheckCircle2],
-  ["Proposals",         "Draft and track proposals and SOWs.",             FileText],
-  ["Deliverables",      "Manage files, docs, and delivery assets.",        FileCheck2],
-  ["Notifications",     "Configure WhatsApp and email workflows.",         Bell],
-  ["Integrations",      "Monitor Supabase, Stripe, Twilio, N8N status.",  Gauge],
-  ["Automations",       "Review N8N workflow runs and logs.",              Workflow],
-  ["SEO & Content",     "Manage local SEO tasks and content queue.",       Rocket],
-  ["AI Assistant",      "Run AI workflows and agent tasks.",               Bot],
-  ["Support",           "Tickets, docs, and system health.",               LifeBuoy],
+  ["Leads & Pipeline",  "Track all leads from intake to close.",         BarChart3],
+  ["Clients",           "Manage active client projects and portals.",     Users],
+  ["Payments",          "View receipts, invoices, and payment events.",   CircleDollarSign],
+  ["Approvals",         "Process release gates and change requests.",     CheckCircle2],
+  ["Proposals",         "Draft and track proposals and SOWs.",            FileText],
+  ["Deliverables",      "Manage files, docs, and delivery assets.",       FileCheck2],
+  ["Notifications",     "Configure WhatsApp and email workflows.",        Bell],
+  ["Integrations",      "Monitor Supabase, Stripe, Twilio, N8N status.", Gauge],
+  ["Automations",       "Review N8N workflow runs and logs.",             Workflow],
+  ["SEO & Content",     "Manage local SEO tasks and content queue.",      Rocket],
+  ["AI Assistant",      "Run AI workflows and agent tasks.",              Bot],
+  ["Support",           "Tickets, docs, and system health.",              LifeBuoy],
 ];
 
 export const envGroups = {
@@ -80,9 +88,19 @@ export function missingEnv(keys: string[]): string[] {
   });
 }
 
-export function setupNotice(system: string, missing: string[]) {
+export type SetupNotice = {
+  system:  string;
+  ready:   boolean;
+  missing: string[];
+  message: string;
+  status:  "configured" | "setup_required";
+};
+
+export function setupNotice(system: string, missing: string[]): SetupNotice {
   return {
-    system, ready: missing.length === 0, missing,
+    system, missing,
+    ready:   missing.length === 0,
+    status:  missing.length === 0 ? "configured" : "setup_required",
     message: missing.length === 0
       ? `${system} is configured.`
       : `${system} requires: ${missing.join(", ")}`,
