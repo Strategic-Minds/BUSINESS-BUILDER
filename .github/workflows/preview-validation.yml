@@ -1,0 +1,17 @@
+name: Preview Validation
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate source truth
+        run: |
+          test -f package.json
+          test -f vercel.json
+          test -f docs/01-builder-docs/VERCEL_WORKFLOW_MASTER_INVOCATION.md
+          test -f docs/06-governance/VALIDATION_GATE.md
