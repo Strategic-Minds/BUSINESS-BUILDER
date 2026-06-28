@@ -1,3 +1,4 @@
+import React from "react";
 import { Bell, CalendarDays, CheckCircle2, Download, MessageSquareText, WalletCards } from "@/components/icons";
 import { PageChrome } from "@/components/site-shell";
 import { clientSteps, deliverables } from "@/lib/site-data";
