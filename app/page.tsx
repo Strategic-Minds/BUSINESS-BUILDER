@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -17,14 +18,14 @@ import { InstallButton } from "@/components/install-button";
 import { PageChrome } from "@/components/site-shell";
 import { integrations, journey, packages, services } from "@/lib/site-data";
 
-const trust = [
+const trust: [string, string, React.ComponentType<{size?: number}>][] = [
   ["AI Automation", "Smart systems", Sparkles],
   ["Fast Delivery", "On-time, every time", Zap],
   ["Transparent", "Real-time updates", ShieldCheck],
   ["Results Driven", "Built for growth", Gauge]
 ];
 
-const why = [
+const why: [string, string, React.ComponentType<{size?: number}>][] = [
   ["Results That Matter", "We focus on outcomes that drive measurable growth.", BadgeCheck],
   ["Clear Communication", "You always know what is happening and what is next.", Sparkles],
   ["On-Time Delivery", "We deliver on time with clear milestones.", ShieldCheck],
