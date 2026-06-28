@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-gold:    #F6B800;
+  --color-gold-dk: #D4A000;
+  --color-black:   #0A0A0A;
+  --color-white:   #FAFAFA;
+  --font-body-min: 17px;
+  --sidebar-width: 220px;
+  --radius:        8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-size: var(--font-body-min);
+  line-height: 1.6;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+::selection { background: var(--color-gold); color: #000; }
