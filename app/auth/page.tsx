@@ -1,3 +1,4 @@
+import React from "react";
 import { LockKeyhole, Mail, ShieldCheck } from "@/components/icons";
 import { PageChrome } from "@/components/site-shell";
 import { envGroups, missingEnv, setupNotice } from "@/lib/site-data";
