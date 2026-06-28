@@ -1,3 +1,4 @@
+import React from "react";
 import { CheckCircle2, CreditCard } from "@/components/icons";
 import { PageChrome } from "@/components/site-shell";
 import { envGroups, missingEnv, packages, setupNotice } from "@/lib/site-data";
