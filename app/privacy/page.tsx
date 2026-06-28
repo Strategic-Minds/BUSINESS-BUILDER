@@ -1,3 +1,4 @@
+import React from "react";
 import { PageChrome } from "@/components/site-shell";
 
 export default function PrivacyPage() {
