@@ -45,19 +45,23 @@ export const packages = [
 
 export const integrations = ["Google Workspace","Supabase","Stripe","Twilio","OpenAI","Vercel"];
 
+// clientSteps includes .receipt field used in client/page.tsx
 export const clientSteps = journey.map(([title, description], index) => ({
-  title, description,
+  title,
+  description,
   status: index < 2 ? "complete" : index === 2 ? "current" : "upcoming",
-  gate: index + 1,
+  gate:    index + 1,
+  receipt: index < 2 ? "Receipt issued" : "Pending approval",
 }));
 
-export const deliverables = [
-  { id: "brief",     title: "Project Brief",     status: "ready",    gate: 1, description: "Goals, scope, and approval structure." },
-  { id: "blueprint", title: "System Blueprint",  status: "ready",    gate: 2, description: "Architecture, integrations, and data models." },
-  { id: "mvp",       title: "MVP Preview",       status: "current",  gate: 3, description: "Working preview build with all core routes." },
-  { id: "qa",        title: "QA Report",         status: "upcoming", gate: 4, description: "Test results, accessibility, and Lighthouse scores." },
-  { id: "launch",    title: "Launch Package",    status: "upcoming", gate: 5, description: "Production-ready build with receipts." },
-  { id: "training",  title: "Training Guide",    status: "upcoming", gate: 6, description: "Handoff docs and team training materials." },
+// deliverables includes .type, .updated, .icon fields used in client/page.tsx
+export const deliverables: { title: string; type: string; status: string; updated: string; icon: IconComponent; id: string; gate: number; description: string }[] = [
+  { id:"brief",     title:"Project Brief",    type:"Strategy Document", status:"Ready",    updated:"Jun 28, 2026", gate:1, description:"Goals, scope, and approval structure.",          icon: FileText as IconComponent },
+  { id:"blueprint", title:"System Blueprint", type:"Architecture Doc",  status:"Ready",    updated:"Jun 28, 2026", gate:2, description:"Architecture, integrations, and data models.",  icon: FileCheck2 as IconComponent },
+  { id:"mvp",       title:"MVP Preview",      type:"Live Build",        status:"Active",   updated:"Jun 28, 2026", gate:3, description:"Working preview build with all core routes.",   icon: Rocket as IconComponent },
+  { id:"qa",        title:"QA Report",        type:"Test Report",       status:"Locked",   updated:"Pending",      gate:4, description:"Test results, accessibility, and Lighthouse.",  icon: CheckCircle2 as IconComponent },
+  { id:"launch",    title:"Launch Package",   type:"Production Build",  status:"Locked",   updated:"Pending",      gate:5, description:"Production-ready build with receipts.",         icon: Zap as IconComponent },
+  { id:"training",  title:"Training Guide",   type:"Handoff Document",  status:"Locked",   updated:"Pending",      gate:6, description:"Handoff docs and team training materials.",     icon: Bot as IconComponent },
 ];
 
 export const adminModules: [string, string, IconComponent][] = [
@@ -99,8 +103,8 @@ export type SetupNotice = {
 export function setupNotice(system: string, missing: string[]): SetupNotice {
   return {
     system, missing,
-    ready:   missing.length === 0,
-    status:  missing.length === 0 ? "configured" : "setup_required",
+    ready:  missing.length === 0,
+    status: missing.length === 0 ? "configured" : "setup_required",
     message: missing.length === 0
       ? `${system} is configured.`
       : `${system} requires: ${missing.join(", ")}`,
