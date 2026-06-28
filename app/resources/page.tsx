@@ -1,8 +1,9 @@
+import React from "react";
 import { BookOpen, FileCheck2, LifeBuoy, Rocket } from "@/components/icons";
 import Link from "next/link";
 import { PageChrome } from "@/components/site-shell";
 
-const resources = [
+const resources: [string, string, React.ComponentType<{size?: number}>][] = [
   ["AI Automation Guide", "A practical guide for choosing the right workflow automation path.", BookOpen],
   ["Client Launch Checklist", "The gated release checklist used before public promotion.", FileCheck2],
   ["Support Center", "Questions, setup notices, and help paths for clients.", LifeBuoy],
