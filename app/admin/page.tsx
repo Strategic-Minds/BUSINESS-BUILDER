@@ -1,3 +1,4 @@
+import React from "react";
 import { PageChrome } from "@/components/site-shell";
 import { adminModules, envGroups, missingEnv, releaseStages, setupNotice } from "@/lib/site-data";
 
