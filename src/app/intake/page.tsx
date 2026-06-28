@@ -6,28 +6,24 @@ export const metadata: Metadata = {
   robots: "noindex",
 };
 
-export default function IntakePage({
-  searchParams,
-}: {
-  searchParams: { package?: string };
-}) {
-  const selectedPackage = searchParams.package ?? "";
+interface IntakePageProps {
+  searchParams: Promise<{ package?: string }>;
+}
+
+export default async function IntakePage({ searchParams }: IntakePageProps) {
+  const params = await searchParams;
+  const selectedPackage = params.package ?? "";
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="w-full max-w-lg">
-        <h1 className="text-3xl font-black mb-2">Let's Build Your System</h1>
+        <h1 className="text-3xl font-black mb-2">Let&apos;s Build Your System</h1>
         <p className="text-gray-400 mb-8">
           {selectedPackage
             ? `You selected the ${selectedPackage.charAt(0).toUpperCase() + selectedPackage.slice(1)} package.`
-            : "Answer a few questions and we'll configure your AI business OS."}
+            : "Answer a few questions and we\'ll configure your AI business OS."}
         </p>
-        <form
-          data-testid="intake-form"
-          action="/api/intake"
-          method="POST"
-          className="space-y-5"
-        >
+        <form data-testid="intake-form" action="/api/intake" method="POST" className="space-y-5">
           <input type="hidden" name="package" value={selectedPackage} />
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-1">Full Name *</label>
