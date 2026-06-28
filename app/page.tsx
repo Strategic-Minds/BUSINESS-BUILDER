@@ -32,7 +32,7 @@ const why: [string, string, React.ComponentType<{size?: number}>][] = [
   ["Ongoing Support", "We stay with you every step of the way.", Gauge]
 ];
 
-const testimonials: [string, string, React.ComponentType<{size?: number}>][] = [
+const testimonials = [
   ["Strategic Minds built our entire automation system. We saved 20+ hours per week and increased revenue by 36% in 3 months.", "James T.", "CEO, Home Services"],
   ["Their team delivered exactly what they promised. The automation runs like clockwork and the support is amazing.", "Sarah M.", "Marketing Director"],
   ["Best investment we have made. They transformed our business with AI and automation.", "Michael R.", "Founder, E-Commerce"]
