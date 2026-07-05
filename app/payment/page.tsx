@@ -18,13 +18,13 @@ export default function PaymentPage() {
             </div>
           </div>
           {!notice.ready ? (
-            <div className="notice" style={{ marginBottom: 24 }}>
+            <div className="notice setup-notice env-missing" data-testid="stripe-setup-notice" data-env-missing="stripe" style={{ marginBottom: 24 }}>
               <b>Setup required:</b> add {notice.missing.join(", ")}. Package buttons return preview-safe responses until then.
             </div>
           ) : null}
           <div className="payment-grid">
             {packages.map((item) => (
-              <form className="payment-option" action="/api/payments/checkout" method="post" key={item.id}>
+              <form className="payment-option package-card" data-testid="package" data-package={item.id} action="/api/payments/checkout" method="post" key={item.id}>
                 <input type="hidden" name="packageId" value={item.id} />
                 <h2>{item.name}</h2>
                 <div className="price">{item.price}</div>
