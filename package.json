@@ -8,11 +8,12 @@
     "start": "next start",
     "lint": "next lint || true",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --reporter=verbose || true",
-    "test:e2e": "playwright test || true",
-    "qa:score": "node scripts/score-system.mjs || true",
-    "qa:full": "npm run validate && npm run qa:score || true",
-    "autofix": "node scripts/autofix-safe-defects.mjs || true"
+    "test": "vitest run --reporter=verbose",
+    "test:e2e": "playwright test",
+    "validate": "npm run build && npm run typecheck && npm run test && npm run test:e2e && npm run qa:score",
+    "qa:score": "node scripts/score-system.mjs",
+    "qa:full": "npm run validate",
+    "autofix": "node scripts/autofix-safe-defects.mjs"
   },
   "dependencies": {
     "next": "15.5.19",
