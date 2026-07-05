@@ -38,11 +38,39 @@ const testimonials = [
   ["Best investment we have made. They transformed our business with AI and automation.", "Michael R.", "Founder, E-Commerce"]
 ];
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Strategic Minds Advisory",
+  url: "https://strategic-minds-ai-business-factory.vercel.app",
+  email: "hello@strategicminds.ai",
+  telephone: "+15551234567",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "123 Innovation Drive",
+    addressLocality: "Austin",
+    addressRegion: "TX",
+    postalCode: "78701",
+    addressCountry: "US"
+  },
+  makesOffer: packages.map((item) => ({
+    "@type": "Offer",
+    name: item.name,
+    description: item.subtitle,
+    price: item.price.replace(/[^0-9]/g, "") || undefined,
+    priceCurrency: "USD"
+  }))
+};
+
 export default function HomePage() {
   return (
     <PageChrome>
       <main>
-        <section className="hero">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <section className="hero" id="hero" data-testid="hero">
           <div className="wrap hero-grid">
             <div className="hero-copy">
               <span className="eyebrow">AI-powered. Automated. Results driven.</span>
@@ -54,9 +82,9 @@ export default function HomePage() {
                 that save time, reduce costs, and drive real results.
               </p>
               <div className="hero-actions">
-                <Link className="button button-primary" href="/#final-cta">
+                <Link className="button button-primary" href="/intake" data-testid="cta-primary">
                   <CalendarDays size={16} />
-                  Schedule a Call
+                  Start Intake
                 </Link>
                 <Link className="button button-ghost" href="/payment">
                   <CircleDollarSign size={16} />
@@ -132,7 +160,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section" id="packages">
+        <section className="section" id="packages" data-testid="packages">
           <div className="wrap">
             <div className="section-heading">
               <span className="section-label">Pick the right package</span>
@@ -140,7 +168,7 @@ export default function HomePage() {
             </div>
             <div className="package-grid">
               {packages.map((item) => (
-                <article className={`package-card ${item.popular ? "popular" : ""}`} key={item.id}>
+                <article className={`package-card ${item.popular ? "popular" : ""}`} key={item.id} data-package={item.id}>
                   {item.popular ? <span className="popular-tag">Most Popular</span> : null}
                   <h3 className="blue-text">{item.name}</h3>
                   <p>{item.subtitle}</p>
@@ -219,8 +247,8 @@ export default function HomePage() {
               <p className="lead" style={{ margin: "0 auto 24px" }}>
                 Schedule a strategy call and let us build your automated future.
               </p>
-              <Link className="button button-primary" href="/resources">
-                Schedule a Call
+              <Link className="button button-primary" href="/intake">
+                Start Intake
                 <ArrowRight size={16} />
               </Link>
             </div>
